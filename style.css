@@ -1,1 +1,42 @@
-/* linked on */
+header{
+    background-color: cornflowerblue;
+}
+
+header h1{
+    text-align: center;
+    font-size: 50PX;
+}
+
+#wrapper{
+    /* background-color: rgb(98, 90, 204); */
+    width: 800px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+#quizArea{
+    background-color: rgb(255, 255, 255);
+}
+
+.btnSettings{
+    font-size: 30px;
+    margin-top: 30px;
+    border-radius: 20px;
+    background-color: rgb(248, 244, 3);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+#judgement{
+    text-align: center;
+    font-size: 40px;
+}
+
+#start{
+    margin-left: 140px;
+}
+
+#startTimer{
+    text-align: center;
+    font-size: 60px;
+}
