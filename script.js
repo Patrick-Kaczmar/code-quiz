@@ -2,6 +2,8 @@ var main = document.querySelector("main");
 
 var footer = document.querySelector("footer");
 
+var body = document.querySelector("body")
+
 var startbtn = document.createElement("button");
 main.appendChild(startbtn);
 startbtn.textContent = "CLICK HERE TO START THE QUIZ!"
@@ -98,6 +100,7 @@ function showTimer() {
         nextQuestion()
         if (timer === 0) {
             clearInterval(startTimer)
+            // highscore()
         }
         timer--
     }, 1000)
@@ -114,6 +117,7 @@ function nextQuestion() {
     var ol = document.createElement("ol")
     footer.appendChild(ol)
 
+
     for (i = 0; i < questionArr[i].choices.length; i++) {
         var li = document.createElement("li")
         ol.appendChild(li)
@@ -125,11 +129,19 @@ function nextQuestion() {
         choice.style.backgroundColor = "rgb(66 178 245)"
         choice.style.cursor = "pointer"
         choice.textContent = questionArr[questionIndex].choices[i]
-        
-        
+
+
         li.addEventListener("click", function() {
-            questionIndex++
-            nextQuestion()
+            if (questionIndex >= questionArr.length - 1) {
+                main.textContent = ""
+                footer.textContent = ""
+                clearInterval(startTimer)
+                // highscore()
+            }
+            else {
+                questionIndex++
+                nextQuestion()
+            }
         })
     }
 }
