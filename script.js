@@ -47,7 +47,7 @@ var questionArr = [
             "i++",
             "1+1",
             "i--",
-            "++i"
+            "++1"
         ]
     },
     {
@@ -117,7 +117,14 @@ function nextQuestion() {
     for (i = 0; i < questionArr[i].choices.length; i++) {
         var li = document.createElement("li")
         ol.appendChild(li)
-        li.textContent = questionArr[questionIndex].choices[i]
+        var choice = document.createElement("button")
+        li.appendChild(choice)
+        choice.style.fontSize = "30px"
+        choice.style.borderRadius = "20px"
+        choice.style.margin = "15px"
+        choice.style.backgroundColor = "rgb(66 178 245)"
+        choice.style.cursor = "pointer"
+        choice.textContent = questionArr[questionIndex].choices[i]
         
         
         li.addEventListener("click", function() {
