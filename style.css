@@ -13,3 +13,8 @@ main{
     width: 1000px;
     margin: 0 auto;
 }
+
+footer{
+    width: 800px;
+    margin-left: 700px;
+}

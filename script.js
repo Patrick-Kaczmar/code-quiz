@@ -1,5 +1,7 @@
 var main = document.querySelector("main");
 
+var footer = document.querySelector("footer");
+
 var startbtn = document.createElement("button");
 main.appendChild(startbtn);
 startbtn.textContent = "CLICK HERE TO START THE QUIZ!"
@@ -15,22 +17,7 @@ main.appendChild(countDown)
 countDown.style.textAlign = "center"
 countDown.style.fontSize = "60px"
 
-
-
-function begin () {
-    startbtn.style.display = "none"
-    var clickCount = 5
-    var prepTimer = setInterval(function() {
-        countDown.textContent = "starting quiz in " + clickCount
-        if (clickCount === 0) {
-            clearInterval(prepTimer)
-            countDown.style.display = "none"
-        }
-        clickCount--
-    }, 1000)
-}
-
-startbtn.addEventListener("click", begin)
+var questionIndex = 0
 
 var questionArr = [
     {
@@ -54,7 +41,7 @@ var questionArr = [
         ]
     },
     {
-        question: "How do you incriment a for loop by 1",
+        question: "How do you incriment a for loop by 1?",
         answerIndex: 0,
         choices: [
             "i++",
@@ -64,7 +51,7 @@ var questionArr = [
         ]
     },
     {
-        question: "Which tag would you use to add a javascript file to your html",
+        question: "Which tag would you use to add a javascript file to your html?",
         answerIndex: 1,
         choices: [
             "<stlye>",
@@ -74,7 +61,7 @@ var questionArr = [
         ]
     },
     {
-        question: "Which of the following uses conditional statements exclusively",
+        question: "Which of the following uses conditional statements exclusively?",
         answerIndex: 2,
         choices: [
             "for loops",
@@ -84,3 +71,62 @@ var questionArr = [
         ]
     },
 ];
+
+
+function begin () {
+
+    startbtn.style.display = "none"
+
+    var clickCount = 5
+
+    var prepTimer = setInterval(function() {
+        countDown.textContent = "starting quiz in " + clickCount
+        if (clickCount === 0) {
+            clearInterval(prepTimer)
+            countDown.textContent = ""
+            showTimer()
+        }
+        clickCount--
+        console.log("seconds until quiz starts " + clickCount)
+    }, 1000)
+}
+
+function showTimer() {
+    var timer = 60
+    var startTimer = setInterval(function() {
+        countDown.textContent = timer
+        nextQuestion()
+        if (timer === 0) {
+            clearInterval(startTimer)
+        }
+        timer--
+    }, 1000)
+}
+
+function nextQuestion() {
+    footer.textContent = ""
+
+    var h1 = document.createElement("h1")
+    footer.appendChild(h1)
+
+    h1.textContent = questionArr[questionIndex].question
+    
+    var ol = document.createElement("ol")
+    footer.appendChild(ol)
+
+    for (i = 0; i < questionArr[i].choices.length; i++) {
+        var li = document.createElement("li")
+        ol.appendChild(li)
+        li.textContent = questionArr[questionIndex].choices[i]
+        
+        
+        li.addEventListener("click", function() {
+            questionIndex++
+            nextQuestion()
+        })
+    }
+}
+
+// console.log(questionArr[0].choices.length)
+
+startbtn.addEventListener("click", begin)
