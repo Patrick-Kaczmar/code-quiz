@@ -98,7 +98,7 @@ function showTimer() {
     var startTimer = setInterval(function() {
         countDown.textContent = timer
         nextQuestion()
-        if (timer === 0) {
+        if (timer === 0 || questionIndex >= questionArr.length - 1 ) {
             clearInterval(startTimer)
             // highscore()
         }
@@ -135,7 +135,6 @@ function nextQuestion() {
             if (questionIndex >= questionArr.length - 1) {
                 main.textContent = ""
                 footer.textContent = ""
-                clearInterval(startTimer)
                 // highscore()
             }
             else {
