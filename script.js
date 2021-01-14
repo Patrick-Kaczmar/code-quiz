@@ -21,6 +21,8 @@ countDown.style.fontSize = "60px"
 
 var questionIndex = 0
 
+var timer = 60
+
 var questionArr = [
     {
         question: "what does the prompt command do?",
@@ -94,19 +96,26 @@ function begin () {
 }
 
 function showTimer() {
-    var timer = 60
     var startTimer = setInterval(function() {
         countDown.textContent = timer
-        nextQuestion()
-        if (timer === 0 || questionIndex >= questionArr.length - 1 ) {
+        if (timer === 0 || questionIndex > questionArr.length - 1) {
             clearInterval(startTimer)
-            // highscore()
+            // highScore()
         }
         timer--
     }, 1000)
+    nextQuestion()
 }
 
 function nextQuestion() {
+
+    if (questionIndex > questionArr.length - 1) {
+        main.textContent = ""
+        footer.textContent = ""
+        // highScore()
+        return
+    }
+
     footer.textContent = ""
 
     var h1 = document.createElement("h1")
@@ -122,6 +131,7 @@ function nextQuestion() {
         var li = document.createElement("li")
         ol.appendChild(li)
         var choice = document.createElement("button")
+        choice.setAttribute("data-index", i)
         li.appendChild(choice)
         choice.style.fontSize = "30px"
         choice.style.borderRadius = "20px"
@@ -131,18 +141,25 @@ function nextQuestion() {
         choice.textContent = questionArr[questionIndex].choices[i]
 
 
-        li.addEventListener("click", function() {
-            if (questionIndex >= questionArr.length - 1) {
-                main.textContent = ""
-                footer.textContent = ""
-                // highscore()
-            }
-            else {
+        li.addEventListener("click", function(event) {
+            var element = event.target
+            console.log(element)
+            var btnIndex = element.getAttribute("data-index")
+            console.log(btnIndex)
+            if (parseInt(btnIndex) !== questionArr[questionIndex].answerIndex) {
+                timer += -10
+                questionIndex++
+                nextQuestion()
+            } else {
                 questionIndex++
                 nextQuestion()
             }
         })
     }
+}
+
+function highScore() {
+
 }
 
 // console.log(questionArr[0].choices.length)
