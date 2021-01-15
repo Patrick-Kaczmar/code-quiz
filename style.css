@@ -18,3 +18,17 @@ footer{
     width: 800px;
     margin-left: 700px;
 }
+
+#score{
+    position: fixed;
+    top: 1;
+    width: 200px;
+    height: 200px;
+    background-color: rgb(141, 141, 141);
+    text-align: center;
+}
+
+#form{
+    text-align: center;
+    display: none;
+}

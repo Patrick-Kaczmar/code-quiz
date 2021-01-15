@@ -4,6 +4,16 @@ var footer = document.querySelector("footer");
 
 var body = document.querySelector("body")
 
+var form = document.querySelector("#form")
+
+var score = document.querySelector("#score")
+
+var subBtn = document.querySelector("#subBtn")
+
+var scoreMsg = document.querySelector("#scoreMsg")
+
+var showScore = document.querySelector("#showScore")
+
 var startbtn = document.createElement("button");
 main.appendChild(startbtn);
 startbtn.textContent = "CLICK HERE TO START THE QUIZ!"
@@ -76,6 +86,7 @@ var questionArr = [
     },
 ];
 
+renderScore()
 
 function begin () {
 
@@ -100,7 +111,7 @@ function showTimer() {
         countDown.textContent = timer
         if (timer === 0 || questionIndex > questionArr.length - 1) {
             clearInterval(startTimer)
-            // highScore()
+            highScore()
         }
         timer--
     }, 1000)
@@ -112,7 +123,7 @@ function nextQuestion() {
     if (questionIndex > questionArr.length - 1) {
         main.textContent = ""
         footer.textContent = ""
-        // highScore()
+        highScore()
         return
     }
 
@@ -158,10 +169,24 @@ function nextQuestion() {
     }
 }
 
-function highScore() {
+function highScore () {
+    form.style.display = "block"
+    scoreMsg.textContent = "Submit your initials to save your score of " + timer
 
+    subBtn.addEventListener("click", function(event) {
+        event.preventDefault()
+        var userName = document.querySelector("#userName").value
+        localStorage.setItem("userScore", userName + ": " + timer)
+        location.reload()
+    })
 }
 
-// console.log(questionArr[0].choices.length)
+function renderScore () {
+    if (localStorage.getItem("userScore") !== null) {
+        showScore.textContent = localStorage.getItem("userScore")
+    } else {
+        showScore.textContent = "0"
+    }
+}
 
 startbtn.addEventListener("click", begin)
