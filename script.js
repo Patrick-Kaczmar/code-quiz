@@ -14,6 +14,8 @@ var scoreMsg = document.querySelector("#scoreMsg")
 
 var showScore = document.querySelector("#showScore")
 
+var clearScore = document.querySelector("#clearScore")
+
 var startbtn = document.createElement("button");
 main.appendChild(startbtn);
 startbtn.textContent = "CLICK HERE TO START THE QUIZ!"
@@ -109,8 +111,10 @@ function begin () {
 function showTimer() {
     var startTimer = setInterval(function() {
         countDown.textContent = timer
-        if (timer === 0 || questionIndex > questionArr.length - 1) {
+        if (timer <= 0 || questionIndex > questionArr.length - 1) {
             clearInterval(startTimer)
+            main.textContent = ""
+        footer.textContent = ""
             highScore()
         }
         timer--
@@ -152,7 +156,7 @@ function nextQuestion() {
         choice.textContent = questionArr[questionIndex].choices[i]
 
 
-        li.addEventListener("click", function(event) {
+        choice.addEventListener("click", function(event) {
             var element = event.target
             console.log(element)
             var btnIndex = element.getAttribute("data-index")
@@ -170,14 +174,21 @@ function nextQuestion() {
 }
 
 function highScore () {
+    if (timer < 0) {
+        timer = 0
+    }
     form.style.display = "block"
     scoreMsg.textContent = "Submit your initials to save your score of " + timer
 
     subBtn.addEventListener("click", function(event) {
         event.preventDefault()
         var userName = document.querySelector("#userName").value
-        localStorage.setItem("userScore", userName + ": " + timer)
-        location.reload()
+        if (userName == "") {
+            alert("Please enter your name in the input field")
+        }else {
+            localStorage.setItem("userScore", userName + ": " + (timer + 1))
+            location.reload()
+        }
     })
 }
 
@@ -189,4 +200,10 @@ function renderScore () {
     }
 }
 
+function clear() {
+    showScore.textContent = "0"
+    localStorage.clear()
+}
+
 startbtn.addEventListener("click", begin)
+clearScore.addEventListener("click", clear)
