@@ -6,4 +6,4 @@ The goal of the user for this code quiz is to answer the questions as fast as th
 
 ## Link to the code quiz - https://patrick-kaczmar.github.io/code-quiz/
 
-
+![website-preview](code-quiz.png)
