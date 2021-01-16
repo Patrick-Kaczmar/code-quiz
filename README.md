@@ -5,3 +5,5 @@ This code quiz was made using minimal html and css and focuses mostly on utilizi
 The goal of the user for this code quiz is to answer the questions as fast as they can and not lose time on the one minute timer. Answering a question wrong will decrease the timer until it hits 0.
 
 ## Link to the code quiz - https://patrick-kaczmar.github.io/code-quiz/
+
+![website-preview](code-quiz.png)
